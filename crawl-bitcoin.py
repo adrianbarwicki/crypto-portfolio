@@ -1,14 +1,12 @@
 import requests
-
-
 from pyquery import PyQuery  
 
-headers = {'Accept-Encoding': 'identity'}
+headers = { 'Accept-Encoding': 'identity' }
 
 articles = []
 
-for index in range(1, 10):
-    r = requests.get("https://news.bitcoin.com/page/" + str(index) , headers=headers)
+for index in range(1, 303):
+    r = requests.get("https://news.bitcoin.com/page/" + str(index), headers=headers)
 
     pq = PyQuery(r.text)
     postTags = pq('div.td_module_wrap')
@@ -21,5 +19,4 @@ for index in range(1, 10):
         article = { "url": url, "title": title.encode("utf-8"), "time": time }
         articles.append(article)
 
-    
 print articles

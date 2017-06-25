@@ -1,12 +1,8 @@
 import requests
-
-
 from pyquery import PyQuery  
 
 headers = {'Accept-Encoding': 'identity'}
 r = requests.get('http://www.coindesk.com/category/news/', headers=headers)
-
-html =  open("demo.html").read().decode('utf8')
 
 articles = []
 
