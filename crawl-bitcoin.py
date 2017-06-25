@@ -5,7 +5,7 @@ headers = { 'Accept-Encoding': 'identity' }
 
 articles = []
 
-for index in range(1, 303):
+for index in range(1, 50):
     r = requests.get("https://news.bitcoin.com/page/" + str(index), headers=headers)
 
     pq = PyQuery(r.text)
