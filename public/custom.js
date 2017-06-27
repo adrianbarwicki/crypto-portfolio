@@ -1,5 +1,6 @@
- google.charts.load('current', {packages: ['corechart', 'line', 'annotatedtimeline']});
-    google.charts.setOnLoadCallback(drawBasic);
+(function() {
+    google.charts.load('current', {packages: ['corechart', 'line', 'annotatedtimeline']});
+google.charts.setOnLoadCallback(drawBasic);
 
 function getNormalDate(dateObj) {
     var month = dateObj.getMonth() + 1;
@@ -12,18 +13,16 @@ function getNormalDate(dateObj) {
 }
 
 function drawBasic() {
-     var quindleDatabase = 'https://www.quandl.com/api/v3/datasets/BCHARTS/COINBASEEUR.json?api_key=yG1CTFPVpgX4-dW3CAe2';
-
      var pricePoints = {};
      var news = [];
 
-     fetch(quindleDatabase)
+     fetch('/api/price/bitcoin')
      .then(response => {
-         return response.json();
+            return response.json();
      })
      .then(data => {
-         data.dataset.data.forEach(pricePoint => {
-            pricePoints[pricePoint[0]] = pricePoint[1];
+         data.forEach(pricePoint => {
+            pricePoints[pricePoint.date] = pricePoint.weighted_price;
          });
          
          fetch('/api/news/bitcoin')
@@ -35,9 +34,9 @@ function drawBasic() {
 
             var dates = Object.keys(pricePoints).map(date => [ new Date(date), pricePoints[date] ])
 
-            news = data.map(item => {
+            news = news.map(item => {
                 var priceDate = getNormalDate(new Date(item.time));
-                var price = bitcoinPrice.bpi[priceDate];
+                var price = pricePoints[priceDate];
 
                 return [ new Date(item.time), price, item.title ]
             });
@@ -71,3 +70,4 @@ function drawBasic() {
           });
        });
     }
+})();

@@ -1,1 +1,0 @@
-python crawl-bitcoin.py > ./data/bitcoin-news.json

@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/adrianbarwicki/bitcoin-price-chart#readme",
   "dependencies": {
-    "express": "^4.15.3"
+    "express": "^4.15.3",
+    "mysql": "^2.13.0"
   }
 }
