@@ -1,14 +1,5 @@
-import crawl
 import crawl_prices
 import models
-
-recent_news = crawl.crawl_bitcoin(no_of_last_pages=307)
-
-for news in recent_news:
-    try:
-        models.add_news(url=news['url'], title=unicode(news['title']), time=news['time'])
-    except:
-        pass
 
 prices = crawl_prices.crawl_bitcoin()
 

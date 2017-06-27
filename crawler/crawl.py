@@ -1,7 +1,7 @@
 import requests
 from pyquery import PyQuery  
 
-def crawl_bitcoin(no_of_last_pages=5):
+def crawl_bitcoin(no_of_last_pages=325):
     print 'Crawling bitcoin'
     headers = { 'Accept-Encoding': 'identity' }
 
@@ -13,6 +13,8 @@ def crawl_bitcoin(no_of_last_pages=5):
         pq = PyQuery(r.text)
         postTags = pq('div.td_module_wrap')
 
+        print 'Crawled page ' + str(index) + ': Extracted ' + str(len(postTags))
+
         for postTag in postTags:
             postTagObj = PyQuery(postTag)
             time =  postTagObj('time').attr('datetime')
@@ -21,9 +23,9 @@ def crawl_bitcoin(no_of_last_pages=5):
             article = { "url": url, "title": title.encode("utf-8"), "time": time }
             articles.append(article)
 
-        print 'news.bitcoin.com: ' + str(len(articles)) + 'articles has been extracted.'
+        print 'news.bitcoin.com: ' + str(len(articles)) + ' articles has been extracted.'
 
-        return articles
+    return articles
 
 def crawl_coindesk():
     headers = {'Accept-Encoding': 'identity'}
