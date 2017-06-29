@@ -1,0 +1,30 @@
+<html>
+    <head>
+    <meta charset="UTF-8">
+    <title>Bitcoin headlines</title>
+
+    <!-- CSS (load bootstrap from a CDN) -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <style>
+        body    { padding-top:50px; }
+    </style>
+    </head>
+<body>
+
+<div class="container">
+    <h1>Headlines</h1>
+
+    <table class="table">
+        <tbody>
+        <% for(var i=0; i<data.length; i++) {%>
+            <tr>
+                <td><%= data[i].title %></td>
+                <td><a href="<%= data[i].url %>">Source</a></td>
+                <td><%= data[i].time %></td>
+            </tr>
+        <% } %>
+        </tbody>
+    </table>    
+</div>
+</body>
+</html>
