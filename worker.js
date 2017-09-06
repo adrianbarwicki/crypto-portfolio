@@ -1,5 +1,25 @@
-const spawn = require('child_process').spawn;
+const exec = require('child_process').exec;
 var py;
+
+const runWorker = () => {
+    console.log('Worker started.')
+
+    py = exec('python ./crawler/crawl-commit.py');
+
+    py.stdout.on('data', data => {
+        console.log(data);
+    });
+
+    py.stdout.on('error', data => {
+        console.log(data);
+    });
+
+    py.stdout.on('end', data => {
+        console.log('Worker ended.')
+        
+        py = null;
+    });
+};
 
 const init = () => {
     setInterval(() => {
@@ -7,20 +27,17 @@ const init = () => {
             return;
         }
 
-        console.log('Worker started.')
-
-        py = spawn('python', [ 'crawler/crawler-commit.py' ]),
-        
-        py.stdout.on('data', data => {
-            console.log(data);
-        });
-
-        py.stdout.on('end', () => {
-            py = null;
-        });
+        runWorker();
     }, 10 * 1000);
 };
 
-module.exports = {
-    init
-};
+if (module.parent) {
+    module.exports = {
+        init
+    };
+} else {
+    runWorker();
+}
+
+
+
