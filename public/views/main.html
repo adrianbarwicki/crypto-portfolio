@@ -1,0 +1,87 @@
+<div class="animated fadeIn">
+    <div class="card-block">
+                    <div class="row">
+                        <div class="col-sm-6 col-lg-4">
+                            <div class="row">
+                                <!--/.col-->
+                                <div class="col-sm-6">
+                                    <div class="callout">
+                                        <small class="text-muted">Initial invest (USD)</small>
+                                        <br>
+                                        <strong class="h4">{{portfolio.initial_value.toFixed(2)}}</strong>
+                                    </div>
+                                </div>
+                                <!--/.col-->
+                                <!--/.col-->
+                                <div class="col-sm-6">
+                                    <div class="callout callout-danger">
+                                        <small class="text-muted">Total value (USD)</small>
+                                        <br>
+                                        <strong class="h4">{{portfolio.total_value.toFixed(2)}}</strong>
+                                        <div class="chart-wrapper"><iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px;"></iframe>
+                                            <canvas id="sparkline-chart-2" width="200" height="60" style="display: block; width: 100px; height: 30px;"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/.col-->
+                            </div>
+                        </div> 
+                        <div class="col-sm-12 col-lg-4">
+                            <div class="row">
+                                 <!--/.col-->
+                                <div class="col-sm-6">
+                                    <div class="callout callout-primary">
+                                        <small class="text-muted">ROI</small>
+                                        <br>
+                                        <strong class="h4">{{ portfolio.roi.toFixed(2) }}%</strong>
+                                    </div>
+                                </div>
+                                <!--/.col-->
+                                <div class="col-sm-6">
+                                    <div class="callout callout-info">
+                                        <small class="text-muted">No. of Assets</small>
+                                        <br>
+                                        <strong class="h4">{{portfolio.positions.length}}</strong>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <br />
+                    <br />
+                    <table class="table table-hover table-outline m-b-0 hidden-sm-down">
+                        <thead class="thead-default">
+                            <tr>
+                                <th>Asset</th>
+                                <th>Price (USD)</th>
+                                <th>Amount</th>
+                                <th>Total Value (USD)</th>
+                                <th>Relative Value (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="position in portfolio.positions | orderBy: '-total_value'">
+                                <td>
+                                    <div><a ng-href="https://coinmarketcap.com/currencies/{{position.ticker}}" target="_blank">{{position.ticker}}</a></div>
+                                </td>
+                                <td>
+                                    <div>{{position.price.toFixed(2)}}</div>
+                                </td>
+                                <td>
+                                    <div>{{position.amount.toFixed(2)}}</div>
+                                </td>
+                                <td>
+                                    <div>{{position.total_value.toFixed(2)}}</div>
+                                </td>
+                                <td>
+                                    <div class="clearfix">
+                                        <div class="pull-left">
+                                            <strong>{{(100 * position.total_value / portfolio.total_value).toFixed(2)}}</strong>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+</div>
