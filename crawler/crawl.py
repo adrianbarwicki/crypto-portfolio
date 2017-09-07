@@ -47,7 +47,7 @@ def crawl_asset_positions():
 
 
     response = {
-        'totalValue': 0,
+        'total_value': 0,
         'positions': []
     }
 
@@ -63,7 +63,7 @@ def crawl_asset_positions():
             'ticker': asset[0],
             'price': price,
             'amount': asset[1],
-            'totalValue': assetAmounts[asset[0]]
+            'total_value': assetAmounts[asset[0]]
         })
 
         print str(asset[0]) + ': $' + str(assetAmounts[asset[0]])
