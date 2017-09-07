@@ -27,7 +27,7 @@ def crawl_asset_positions():
         [ 'iconomi', 33.08107689 ],
         [ 'lisk', 113.98892433 ],
         [ 'qtum', 89.53001376 ],
-        [ 'stratis', 73.50000000 ],
+        [ 'stratis', 0 ],
         [ 'storj', 702.56260124 ],
         [ 'monaco', 62.37464931 ],
         [ 'neo', 15.41751707 ],
