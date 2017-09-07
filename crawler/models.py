@@ -50,6 +50,6 @@ def edit_asset_position(ticker, price, amount):
         AssetPosition(ticker=ticker, price=price, amount=amount, total_value=amount*price)
     else:
         position.price=price
-        position.amount*price
+        position.total_value=position.amount*price
         position.amount=amount
  
