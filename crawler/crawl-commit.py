@@ -9,7 +9,9 @@ def init():
     for asset_position in recent_asset_positions['positions']:
         print asset_position
         models.edit_asset_position(
-            ticker=asset_position['ticker'], price=asset_position['price'], amount=asset_position['amount']
+            ticker=asset_position['ticker'],
+            price=asset_position['price'],
+            amount=asset_position['amount']
         )
 
     print recent_asset_positions
