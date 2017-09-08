@@ -2,6 +2,15 @@ import requests
 from pyquery import PyQuery
 import json
 
+def crawl_tickers():
+    url = 'https://api.coinmarketcap.com/v1/ticker/'
+
+    r = requests.get(url)
+
+    jsonObject = r.json()
+
+    return jsonObject
+
 def crawl_asset_position(ticker):
     url = 'https://coinmarketcap.com/currencies/' + ticker
 
@@ -25,12 +34,12 @@ def crawl_asset_positions():
         [ 'litecoin', 0.286 ],
         [ 'iota', 640.93903868 ],
         [ 'iconomi', 33.08107689 ],
-        [ 'lisk', 98.98892433 ],
+        [ 'lisk', 164.96694652 ],
         [ 'qtum', 122.45607746 ],
         [ 'stratis', 0 ],
-        [ 'storj', 702.56260124 ],
+        [ 'storj', 452.56260124 ],
         [ 'monaco', 62.37464931 ],
-        [ 'neo', 10.41751707 ],
+        [ 'neo', 0 ],
         [ 'zcash', 0.62964194 ],
         [ 'civic', 599.79909129 ],
         [ 'legends-room', 148.95669071 ],
@@ -44,7 +53,6 @@ def crawl_asset_positions():
         [ 'lunyr', 3.35553727 ],
         [ 'particl', 1 ]
     ]
-
 
     response = {
         'total_value': 0,

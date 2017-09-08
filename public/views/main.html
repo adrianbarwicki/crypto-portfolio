@@ -57,6 +57,7 @@
                                 <th>Total Value (USD)</th>
                                 <th>Relative Value (%)</th>
                                 <th>News</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -85,6 +86,14 @@
                                     <div class="clearfix">
                                         <div class="pull-left">
                                             <a ng-href="https://twitter.com/search?q=%23{{position.ticker}}" target="_blank">Twitter</a>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="clearfix">
+                                        <div class="pull-left">
+                                            <a ui-sref="app.asset({ ticker: position.ticker })">Edit</a>
                                         </div>
                                     </div>
                                 </td>

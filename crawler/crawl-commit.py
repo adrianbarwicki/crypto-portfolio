@@ -4,6 +4,13 @@ import crawl
 import models
 
 def init():
+    '''
+    recent_ticker_prices = crawl.crawl_tickers()
+
+    for ticker_price in recent_ticker_prices:
+        print ticker_price['id']
+
+    '''
     recent_asset_positions = crawl.crawl_asset_positions()
 
     for asset_position in recent_asset_positions['positions']:

@@ -1,0 +1,26 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <strong>{{ticker}}</strong>
+                </div>
+                <div class="card-block">
+                    <form action="" method="post" class="form-horizontal ">
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" >Amount</label>
+                            <div class="col-md-9">
+                                <input ng-model="asset.amount" type="number" name="amount" class="form-control" placeholder="Enter amount..">
+                                <span class="help-block">Please enter amount of coins / asset</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" ng-click="updateAsset()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+                </div>
+            </div>
+        </div>
+        <!--/col-->
+    </div>
+</div>

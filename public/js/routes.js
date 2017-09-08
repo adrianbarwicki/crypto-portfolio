@@ -148,6 +148,38 @@ angular
       }]
     }
   })
+  .state('app.asset', {
+    url: '/asset/:ticker',
+    templateUrl: 'views/asset.html',
+    controller: 'assetCtrl',
+    //page title goes here
+    ncyBreadcrumb: {
+      label: 'Asset',
+    },
+    //page subtitle goes here
+    params: { subtitle: 'Asset' },
+    resolve: {
+      loadPlugin: ['$ocLazyLoad', function ($ocLazyLoad) {
+        // you can lazy load files for an existing module
+        return $ocLazyLoad.load([
+          {
+            serie: true,
+            name: 'chart.js',
+            files: [
+              'bower_components/chart.js/dist/Chart.min.js',
+              'bower_components/angular-chart.js/dist/angular-chart.min.js'
+            ]
+          },
+        ]);
+      }],
+      loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+        // you can lazy load controllers
+        return $ocLazyLoad.load({
+          files: ['js/controllers/main.js']
+        });
+      }]
+    }
+  })
   .state('appSimple.404', {
     url: '/404',
     templateUrl: 'views/pages/404.html'

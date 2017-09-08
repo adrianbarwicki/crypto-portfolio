@@ -16,7 +16,20 @@ class Price(db.Entity):
     volume_local = Optional(float)
     volume_currency = Optional(float)
     composite_key(code, date)
-
+'''
+class Ticker(db.Entity):
+    id = PrimaryKey(str)
+    name = Required(str)
+    symbol = Required(str)
+    rank = Required(int)
+    price_usd = Required(float)
+    price_btc = Required(float)
+    24h_volume_usd = Required(float)
+    market_cap_usd = Required(float)
+    percent_change_1h = Required(float)
+    percent_change_24h = Required(float)
+    percent_change_7d = Required(float)
+'''
 class AssetPosition(db.Entity):
     id = PrimaryKey(int, auto=True)
     ticker = Required(str, unique=True)
@@ -52,4 +65,15 @@ def edit_asset_position(ticker, price, amount):
         position.price=price
         position.total_value=position.amount*price
         position.amount=amount
+
+@db_session
+def edit_ticker(ticker):
+    ticker = Ticker.get(id=ticker['id'])
+
+    if position == None:
+        Ticker(ticker)
+    else:
+        for tickerKey in ticker:
+            ticker[tickerKey] = ticker[tickerKey]
+            
  

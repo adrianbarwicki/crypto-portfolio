@@ -32,6 +32,38 @@ const init = app => {
             res.status(200).send(response);
         });
     });
+
+    app.get('/api/asset/:ticker', (req, res) => {
+        const ticker = req.params.ticker;
+
+        pool.query('SELECT * FROM assetposition WHERE ticker=?', [
+            ticker
+        ], (error, results, fields) => {
+            if (error) throw error;
+            
+            if (!results.length) {
+                res
+                .status(404)
+                .send();
+            }
+
+            res.status(200).send(results[0]);
+        });
+    });
+
+    app.put('/api/asset/:ticker', (req, res) => {
+        const amount = req.body.amount;
+        const ticker = req.params.ticker;
+
+        pool.query('UPDATE assetposition SET amount=? WHERE ticker=?', [
+            amount,
+            ticker
+        ], (error, results, fields) => {
+            if (error) throw error;
+            
+            res.status(200).send(results);
+        });
+    });
 };
 
 module.exports = {
