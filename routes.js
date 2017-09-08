@@ -25,7 +25,7 @@ const init = app => {
 
             response.positions = results;
             response.total_value = results.reduce((sum, position) => sum + position.total_value, 0);
-            response.initial_value = 5996 / 0.84;
+            response.initial_value = (5996 + 404) / 0.84;
             response.roi = 100 * (response['total_value'] - response['initial_value']) / response['initial_value']
             response.positions = results;
 

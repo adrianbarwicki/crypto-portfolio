@@ -28,20 +28,22 @@ def crawl_asset_position(ticker):
 
 def crawl_asset_positions():
     myAssets = [
+        [ 'qtum', 139.88659804 ],
+        [ 'lisk', 164.96694652 ],
+        [ 'monaco', 62.37464931 ],
+        [ 'tenx', 13.64695279 ],
+        [ 'ethereum', 1.8468 ],
+
         [ 'patientory', 50.00000000 ],
         [ 'blockchain-index', 416.125239 ],
-        [ 'ethereum', 0.3621 ],
         [ 'litecoin', 0.286 ],
         [ 'iota', 640.93903868 ],
         [ 'iconomi', 33.08107689 ],
-        [ 'lisk', 164.96694652 ],
-        [ 'qtum', 122.45607746 ],
         [ 'stratis', 0 ],
         [ 'storj', 452.56260124 ],
-        [ 'monaco', 62.37464931 ],
         [ 'neo', 0 ],
         [ 'zcash', 0.62964194 ],
-        [ 'civic', 599.79909129 ],
+        [ 'civic', 289.79909129 ],
         [ 'legends-room', 148.95669071 ],
         [ 'nav-coin', 111.86971722 ],
         [ 'waves', 30.06769465 ],
@@ -49,7 +51,6 @@ def crawl_asset_positions():
         [ 'decred', 1.62276111 ],
         [ 'gamecredits', 26.61510377 ],
         [ 'district0x', 3554.545 ],
-        [ 'tenx', 13.64695279 ],
         [ 'lunyr', 3.35553727 ],
         [ 'particl', 1 ]
     ]
