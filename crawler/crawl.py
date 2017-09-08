@@ -33,7 +33,6 @@ def crawl_asset_positions():
         [ 'monaco', 62.37464931 ],
         [ 'tenx', 13.64695279 ],
         [ 'ethereum', 1.8468 ],
-
         [ 'patientory', 50.00000000 ],
         [ 'blockchain-index', 416.125239 ],
         [ 'litecoin', 0.286 ],

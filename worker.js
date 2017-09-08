@@ -1,34 +1,21 @@
-const exec = require('child_process').exec;
-var py;
+const priceCrawler = require('./workers/price-crawler');
+const newsCrawler = require('./workers/news-crawler');
+
+var running;
 
 const runWorker = () => {
-    console.log('Worker started.')
-
-    py = exec('python ./crawler/crawl-commit.py');
-
-    py.stdout.on('data', data => {
-        console.log(data);
-    });
-
-    py.stdout.on('error', data => {
-        console.log(data);
-    });
-
-    py.stdout.on('end', data => {
-        console.log('Worker ended.')
-        
-        py = null;
-    });
+    setTimeout(() => newsCrawler(), 1000);
+    setTimeout(() => priceCrawler(), 1000 * 5);
 };
 
 const init = () => {
     setInterval(() => {
-        if (py) {
+        if (running) {
             return;
         }
 
         runWorker();
-    }, 10 * 1000);
+    }, 30 * 1000);
 };
 
 if (module.parent) {

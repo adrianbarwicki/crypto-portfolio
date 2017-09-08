@@ -1,0 +1,24 @@
+<div class="animated fadeIn">
+    <table class="table table-hover table-outline m-b-0 hidden-sm-down">
+                    <thead class="thead-default">
+                        <tr>
+                            <th>Ticker</th>
+                            <th>Price USD</th>
+                            <th>Price BTC</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="ticker in priceTickers">
+                            <td>
+                                <div><a ng-href="https://coinmarketcap.com/currencies/{{ticker.id}}" target="_blank">{{ticker.id}}</a></div>
+                            </td>
+                            <td>
+                                <div>{{ticker.price_usd}}</div>
+                            </td>
+                            <td>
+                                <div>{{ticker.price_btc.toFixed(6)}}</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+</div>
