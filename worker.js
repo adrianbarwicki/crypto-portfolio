@@ -1,21 +1,37 @@
 const priceCrawler = require('./workers/price-crawler');
 const newsCrawler = require('./workers/news-crawler');
 
-var running;
+var running = {
+    news: false,
+    prices: false
+};
 
 const runWorker = () => {
-    setTimeout(() => newsCrawler(), 1000);
-    setTimeout(() => priceCrawler(), 1000 * 5);
+    if (!running.news) {
+        running.news = true;
+
+        newsCrawler(() => {
+            console.log('[WORKER] News crawler finished');
+
+            running.news = false;
+        });
+    }
+    
+    if (!running.prices) {
+        running.prices = true;
+
+        priceCrawler(() => {
+            console.log('[WORKER] Price crawler finished');
+
+            running.prices = false;
+        });
+    }
 };
 
 const init = () => {
     setInterval(() => {
-        if (running) {
-            return;
-        }
-
         runWorker();
-    }, 30 * 1000);
+    }, 60 * 1000);
 };
 
 if (module.parent) {

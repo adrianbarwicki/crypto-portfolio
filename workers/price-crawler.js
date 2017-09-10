@@ -2,7 +2,7 @@ const request = require('request');
 const async = require('async');
 const models = require('../models');
 
-const crawlPrices = () => {
+const crawlPrices = cb => {
     request
     .get('https://api.coinmarketcap.com/v1/ticker/', (err, response, body) => {
         const tickers = JSON.parse(body);
@@ -16,10 +16,12 @@ const crawlPrices = () => {
             .then(_ => cb(), cb);
         }, err => {
             if (err) {
-                return console.error(err);
+                console.error(err);
 
                 if (!module.parent) {
-                    process.exit();
+                    return process.exit();
+                } else {
+                    return cb && cb();
                 }
             }
 
@@ -27,6 +29,8 @@ const crawlPrices = () => {
 
             if (!module.parent) {
                 process.exit();
+            } else {
+                return cb && cb();
             }
         });
     });
