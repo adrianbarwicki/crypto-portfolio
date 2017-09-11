@@ -29,7 +29,7 @@ const init = app => {
             results = JSON.parse(JSON.stringify(results));
 
             const portfolio = {
-                initial_value: (5996 + 404 + 104 + 100 + 150) / 0.84,
+                initial_value: (5996 + 404 + 104 + 100 + 150 + 200) / 0.83,
                 total_value: 0,
                 roi: 0,
                 positions: []
