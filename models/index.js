@@ -32,6 +32,8 @@ Object.keys(db).forEach(modelName => {
   }
 });
  */
+
+db.assetPosition.belongsTo(db.portfolio);
 db.assetPosition.belongsTo(db.priceTicker);
 db.priceTicker.hasMany(db.assetPosition);
 
