@@ -20,58 +20,49 @@ const init = app => {
       });
       
     app.get('/api/portfolio', (req, res) => {
-        models.assetPosition.findAll({
-            include: [{
-                model: models.priceTicker
-            }]
-        })
-        .then(results => {
-            results = JSON.parse(JSON.stringify(results));
-
-            const portfolio = {
-                initial_value: (5996 + 404 + 104 + 100 + 150 + 200 + 200 + 200 + 300 + 794.81 + 1059.35 + 256.71 + 286.56) / 0.84,
-                total_value: 0,
-                roi: 0,
-                positions: []
-            };
-
-            portfolio.positions = results
-            .map(result => {
-                result.total_value = result.priceTicker.price_usd * result.amount;
-
-                portfolio.total_value += result.total_value;
-
-                return result;
+        models.portfolio.findOne({
+            where: {
+                id: 1
+            }
+        }).then(rPortfolio => {
+            models.assetPosition.findAll({
+                include: [{
+                    model: models.priceTicker
+                }]
+            })
+            .then(results => {
+                results = JSON.parse(JSON.stringify(results));
+    
+                const portfolio = {
+                    initial_value: rPortfolio.initialValue / 0.84,
+                    total_value: 0,
+                    roi: 0,
+                    positions: []
+                };
+    
+                portfolio.positions = results
+                .map(result => {
+                    result.total_value = result.priceTicker.price_usd * result.amount;
+    
+                    portfolio.total_value += result.total_value;
+    
+                    return result;
+                });
+                
+                portfolio.positions = portfolio.positions
+                .map(result => {
+                    result.rel_value = 100 * (result.total_value / portfolio.total_value);
+                    result.rel_value = result.rel_value.toFixed(2);
+    
+                    return result;
+                });
+    
+                portfolio.roi = 100 * (portfolio.total_value - portfolio.initial_value) / portfolio.initial_value;
+    
+                res.status(200)
+                .send(portfolio);
             });
-            
-            portfolio.positions = portfolio.positions
-            .map(result => {
-                result.rel_value = 100 * (result.total_value / portfolio.total_value);
-                result.rel_value = result.rel_value.toFixed(2);
-
-                return result;
-            });
-
-            portfolio.roi = 100 * (portfolio.total_value - portfolio.initial_value) / portfolio.initial_value;
-
-            res.status(200)
-            .send(portfolio);
         });
-        /**
-        pool.query('SELECT * FROM assetposition', (error, results, fields) => {
-            if (error) throw error;
-            
-            const response = {};
-
-            response.positions = results;
-            response.total_value = results.reduce((sum, position) => sum + position.total_value, 0);
-            response.initial_value = (5996 + 404) / 0.84;
-            response.roi = 100 * (response['total_value'] - response['initial_value']) / response['initial_value']
-            response.positions = results;
-
-            res.status(200).send(response);
-        });
-        */
     });
 
     app.get('/api/price-tickers', (req, res) => {
