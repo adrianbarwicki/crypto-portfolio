@@ -41,6 +41,7 @@ const init = app => {
                 };
     
                 portfolio.positions = results
+                .filter(result => result.amount)
                 .map(result => {
                     result.total_value = result.priceTicker.price_usd * result.amount;
     

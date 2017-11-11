@@ -12,7 +12,7 @@ angular
         .get('/api/portfolio')
         .then(response => {
             $scope.portfolio = response.data;
-        })
+        });
 }])
 
 .controller('assetCtrl', [ '$scope', '$state', '$http', '$stateParams', function($scope, $state, $http, $stateParams) {
