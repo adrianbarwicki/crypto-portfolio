@@ -51,7 +51,7 @@ angular
     }
   })
   .state('app.main', {
-    url: '/dashboard',
+    url: '/dashboard/:portfolioId',
     templateUrl: 'views/main.html',
     controller: 'dashboardCtrl',
     //page title goes here

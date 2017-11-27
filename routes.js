@@ -19,10 +19,10 @@ const init = app => {
         });
       });
       
-    app.get('/api/portfolio', (req, res) => {
+    app.get('/api/portfolio/:id', (req, res) => {
         models.portfolio.findOne({
             where: {
-                id: 1
+                id: req.params.id
             }
         }).then(rPortfolio => {
             models.assetPosition.findAll({

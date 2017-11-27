@@ -2,18 +2,18 @@
 
 angular
 .module('app')
-.controller('dashboardCtrl', [ '$scope', '$http', function($scope, $http) {
+.controller('dashboardCtrl', [ '$scope', '$http', '$stateParams',
+    function($scope, $http, $stateParams) {
+        $scope.portfolio = {
+            positions: []
+        };
 
-    $scope.portfolio = {
-        positions: []
-    };
-
-    $http
-        .get('/api/portfolio')
-        .then(response => {
-            $scope.portfolio = response.data;
-        });
-}])
+        $http
+            .get('/api/portfolio/' + $stateParams.portfolioId || 1)
+            .then(response => {
+                $scope.portfolio = response.data;
+            });
+    }])
 
 .controller('assetCtrl', [ '$scope', '$state', '$http', '$stateParams', function($scope, $state, $http, $stateParams) {
         $scope.asset = {};
